@@ -320,6 +320,8 @@ TBC
 
 \subsubsection*{c) CDK tautomer calculation in Bioclipse moltable [EGON]}
 
+The InChI library can also be used to generate tautomers\cite{FOO}. This method has been
+implemented in the CDK by Rijnbeek, and exposed in the Bioclipse Scripting Language:
 
 {\footnotesize 
 \begin{verbatim}
@@ -342,6 +344,10 @@ ui.open(file);
 \end{verbatim}
 }
 
+Using this approach we can generate tautomers for any molecules, though it is limited by
+the heuristic rules implemented by the InChI library. We typically only find a subset
+of tautomers, rather than a full set. For example, for warfarin it finds only six tautomers
+out of the 43 reported ones~\cite{FOO2}.
 
 %%%%%%%%%%%%%%%%%%%%%%
 \section*{Conclusions}
