@@ -249,21 +249,30 @@ It is of great importance that chemical structures can be serialized in standard
 \section*{Results and Discussion}
 
 \subsection*{Packaging InChI in a Java library [EGON, SAM]}
-JNI-InChI is the packaging of the InChI libraries in portable Java libraries using the Java Native Interface. Available on Sourceforge under Gnu Lesser General Public License (LGPL)\dots TBC
 
-%BELOW IS FROM BO5yearsOnPaper
+JNI-InChI is the packaging of the InChI libraries in portable Java libraries using the Java Native Interface~\cite{5Paper}.
+Available on Sourceforge under GNU Lesser General Public License (LGPL). The JNI-InChI library provides native binaries of the
+InChI library for 32- and 64-bit Windows, Linux and Solaris, 64-bit FreeBSD and 64-bit Intel-based Mac OS X, covering the most
+common platforms on which the CDK and Bioclipse are run.
 
-%The Blue Obelisk project JNI-InChI~\cite{jni-inchi} was established in 2006 to solve this problem by using the Java Native Interface framework to provide transparent access to the InChI library from within Java and other Java Virtual Machine (JVM) based languages, supporting the wider adoption of this standard identifier by the chemistry community.
+\subsection*{Integration of InChI in CDK [EGON, SAM]}
 
-%The Java Native Interface framework provides a mechanism for code running inside the JVM, to place calls to libraries written in languages such as C, C++ and Fortran, and compiled into native, machine specific, code. JNI-InChI provides a thin C wrapper, with corresponding Java code, around the IUPAC InChI library, exposing the InChI library's functionality to the JVM. To overcome the need to have the correct InChI library pre-installed on a system, JNI-InChI comes with a variety of precompiled native binaries and automatically extracts and deploys the correct one for the detected operating system and architecture. The JNI-InChI library comes with native binaries supporting a range of operating systems and architectures; the current version has binaries for 32- and 64-bit Windows, Linux and Solaris, 64-bit FreeBSD and 64-bit Intel-based Mac OS X - a number of which are not supported by the original IUPAC distribution of InChI. The JNI-InChI project has matured to support the full range of functionality of the InChI C library: structure-to-InChI, InChI-to-structure, AuxInfo-to-structure, InChIKey generation, and InChI and InChIKey validation. JNI-InChI provides the InChI functionality for a number of Open Source projects, including the Chemistry Development Kit, Bioclipse and CMLXOM/JUMBO, and is also used by commercial applications and internally in a number of companies. Through its widespread use and Open Source development model, a number of issues in earlier versions of the software have been identified and resolved, and JNI-InChI now offers a robust tool for working with InChIs in the JVM.
+While JNI-InChI supports the full range of functionality of the InChI C library, structure-to-InChI, InChI-to-structure,
+AuxInfo-to-structure, InChIKey generation, and InChI and InChIKey validation, not all of this functionality is available in the
+CDK library, in version 1.4.13. 
 
+The CDK-to-JNI-InChI bridge supports the following layers:
+\begin{itemize}
+\item connectivity layer, /c
+\item tetrahedral stereochemistry layers, /t, /m, and /s
+\item double bond stereochemistry, /FOO (from 2D coordinates)
+\item isotope layer, /BAR
+\item ...
+\end{itemize}
 
-
-
-
-\subsection*{Integration of InChI in CDK [EGON]}
 TBC
 
+The bridge allows InChI and InChIKeys to be generated using various options... /FixedH, etc, ...
 
 \begin{figure*}[!hb]
 \begin{center}
@@ -274,8 +283,10 @@ TBC
 \end{center}
 \end{figure*}
 
-
 \subsection*{Provisioning of InChI as OSGi bundles [OLA, ARVID]}
+The former uses the stock JAR archive provided by the JNI-InChI project,
+but those have been found insufficient for OSGi environments.
+
 OSGi~\cite{osgi} is a standard for dynamic module system in Java, allowing for easy provisioning and interoperability of modules, mainly containing compiled Java code but also associated data. The Bioclipse projects has developed OSGi bundles for InChI by wrapping the JNI-InChI libraries, which required some modifications... class loaders... The OSGi bundles are available from a p2 repository (TBC), as well as downloadable from the web page (TBC)\dots Having OSGi bundles with InChI enables easy access from all plugins supporting this module technology, which in 
 
 Cheminformatics tools that makes use of the OSGi module system includes Knime~\cite{Warr:2012kx}, Cytoscape~\cite{Shannon:2003zr}, Taverna~\cite{Oinn:2004ys,Truszkowski:2011vn}, and Bioclipse~\cite{Spjuth:2007ve}.
@@ -321,7 +332,7 @@ TBC
 \subsubsection*{c) CDK tautomer calculation in Bioclipse moltable [EGON]}
 
 The InChI library can also be used to generate tautomers\cite{FOO}. This method has been
-implemented in the CDK by Rijnbeek, and exposed in the Bioclipse Scripting Language:
+implemented in the CDK by Rijnbeek~\cite{patchFOO}, and exposed in the Bioclipse Scripting Language:
 
 {\footnotesize 
 \begin{verbatim}
