@@ -326,8 +326,37 @@ Bioclipse is a workbench for the life sciences where cheminformatics is the most
 In chemical safety assessment, the first step when faced with a new chemical structure is to see weather it already has been synthesized, and if any in vitro assays or in vivo studies have been performed. Given the large size of knowledge bases in companies and organizations, exact database lookups have become ubiquitous tools and used on a daily basis. Bioclipse Decision Support provides a framework for running exact match queries against a library of chemical structures, which was demonstrated for 3 open safety endpoints~\cite{Spjuth:2011qf}. An example query can be seen in Figure~\ref{fig:danth-ds}.
 
 
-\subsubsection*{b) Linked data in Bioclipse and CDK using InChI (e.g. Isbjorn) [EGON]}
-TBC
+\subsubsection*{b) Linked data spidering in Bioclipse with Isbjørn [EGON]}
+
+Molecular structures on the internet can be searched using InChI and InChIKeys~\cite{PMRSomething} directly.
+However, they can also be used as seed to spider (the process of following links on the world wide web)
+the Linked Data section of the World Wide Web~\cite{Samwald2011}. We developed a plugin to Bioclipse
+that searches the Internet for information about a molecule, initiated with the InChI and a web service
+we developed earlier, providing Universal Resource Identifiers for molecules~\cite{SomeRONPaper}. This
+service provides a number of initial links to other Linked Data resources, and links to other
+resources are followed using owl:sameAs and skos:exactMatch predicates.
+
+While spidering the web of molecular information, common ontologies are recognized and use to extract
+information about the compound. Recognized ontologies include general ontologies like
+Dublin Code, RDF Scheme, SKOS, and FOAF~\cite{FOAF}, as well as domain specific ontologies, like
+ChemAxiom~\cite{AdamsNP}, CHEMINF~\cite{Hastings2011}, and specific predicates
+used by specific databases, including Bio2RDF~\cite{Bio2RDF}, DBPedia~\cite{DBPedia},
+FreeBase~\cite{FreeBase} and ChemSpider~\cite{ChemSpider} (see Figure~\ref{fig:dbpedia} left).
+
+But by educating Isbjørn about further ontologies we can even, for example, extract drug side effects
+from the SIDER database~\cite{SIDER}, as exposed by the Free University Berlin RDF services,
+as shown in Figure~\ref{fig:sider} right. The search results of Isbjørn are presented in Bioclipse
+as a HTML page and opened in a browser window (not shown).
+
+\begin{figure*}[!hb]
+\begin{center}
+	\includegraphics[width=7cm]{isbjorn6.png}
+	\includegraphics[width=7cm]{isbjorn8.png}
+\caption{Screenshot of Linked Data spidering results by Isbjørn presented as a HTML page.}
+\label{fig:danth-ds}
+\end{center}
+\end{figure*}
+
 
 \subsubsection*{c) CDK tautomer calculation in Bioclipse moltable [EGON]}
 
