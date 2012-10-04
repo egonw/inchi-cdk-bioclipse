@@ -248,7 +248,7 @@ It is of great importance that chemical structures can be serialized in standard
 %%
 \section*{Results and Discussion}
 
-\subsection*{Packaging InChI in a Java library [EGON, SAM]}
+\subsection*{Packaging InChI in a Java library}
 
 JNI-InChI is the packaging of the InChI libraries in portable Java libraries using the Java Native Interface~\cite{5Paper}.
 Available on Sourceforge under GNU Lesser General Public License (LGPL). The JNI-InChI library provides native binaries of the
@@ -283,16 +283,24 @@ The bridge allows InChI and InChIKeys to be generated using various options... /
 \end{center}
 \end{figure*}
 
-\subsection*{Provisioning of InChI as OSGi bundles [OLA, ARVID]}
-The former uses the stock JAR archive provided by the JNI-InChI project,
-but those have been found insufficient for OSGi environments.
+%OSGi bundles
+\subsection*{Provisioning of InChI as OSGi bundles}
+%The former uses the stock JAR archive provided by the JNI-InChI project, but those have been found insufficient for OSGi environments.
 
-OSGi~\cite{osgi} is a standard for dynamic module system in Java, allowing for easy provisioning and interoperability of modules, mainly containing compiled Java code but also associated data. The Bioclipse projects has developed OSGi bundles for InChI by wrapping the JNI-InChI libraries, which required some modifications... class loaders... The OSGi bundles are available from a p2 repository (TBC), as well as downloadable from the web page (TBC)\dots Having OSGi bundles with InChI enables easy access from all plugins supporting this module technology, which in 
+OSGi~\cite{osgi} is a standard for dynamic module system in Java, allowing for easy provisioning and interoperability of modules, mainly containing compiled Java code but also associated data. The Bioclipse projects has developed OSGi bundles for InChI by wrapping the JNI-InChI libraries, which required some modifications to e.g. class loaders. The OSGi bundles are available from a p2 repository for easy provisioning and integration. Having OSGi bundles with InChI enables easy access from all plugins supporting this module technology. Cheminformatics tools that makes use of the OSGi module system includes Knime~\cite{Warr:2012kx}, Cytoscape~\cite{Shannon:2003zr}, Taverna~\cite{Oinn:2004ys,Truszkowski:2011vn}, and Bioclipse~\cite{Spjuth:2007ve}. See \url{http://www.bioclipse.net/inchi-osgi} for more information about InChI as OSGi bundles.
 
-Cheminformatics tools that makes use of the OSGi module system includes Knime~\cite{Warr:2012kx}, Cytoscape~\cite{Shannon:2003zr}, Taverna~\cite{Oinn:2004ys,Truszkowski:2011vn}, and Bioclipse~\cite{Spjuth:2007ve}.
-
-\subsection*{Integration of InChI in Bioclipse  [OLA]}
+%InChI in Bioclipse
+\subsection*{Integration of InChI in Bioclipse}
 Bioclipse is a workbench for the life sciences where cheminformatics is the most developed functionality. Key features of Bioclipse includes import, export and editing of chemical structures in various file formats, as well as visualizations and various property calculations - all features available from both a graphical workbench as well as a built-in scripting language (Bioclipse Scripting Language, or BSL)~\cite{Spjuth:2009ly}. As a Rich Client built on the Eclipse Rich Client Platform (RCP), Bioclipse inherits an extensible architecture implementing the OSGi standard. By adding the previously described InChI OSGi bundles to Bioclipse, Bioclipse exposes InChI calculation as a key feature in the workbench, and InChI is calculated on all structure modifications and visualized as a general property in the workbench window (see Figure~\ref{fig:carba-prop}). Bioclipse supports both the generation of standard and non-standard InChIs, and a preference allows for selecting between the different versions.
+
+
+
+\begin{verbatim}
+  mol=cdk.fromSMILES("OC=O")
+  sinchi = inchi.generate(mol);
+  inchi = inchi.generate(mol), "FixedH");
+\end{verbatim}
+
 
 \begin{figure*}[!hb]
 \begin{center}
@@ -303,16 +311,8 @@ Bioclipse is a workbench for the life sciences where cheminformatics is the most
 \end{center}
 \end{figure*}
 
-
-
-
 	
 
-\begin{verbatim}
-  mol=cdk.fromSMILES("OC=O")
-  sinchi = inchi.generate(mol);
-  inchi = inchi.generate(mol), "FixedH");
-\end{verbatim}
 
 
 %%%%%%%%%%
@@ -322,7 +322,7 @@ Bioclipse is a workbench for the life sciences where cheminformatics is the most
 
 
 
-\subsubsection*{Decision support in computational pharmacology [OLA]}
+\subsubsection*{a) Decision support in computational pharmacology}
 In chemical safety assessment, the first step when faced with a new chemical structure is to see weather it already has been synthesized, and if any in vitro assays or in vivo studies have been performed. Given the large size of knowledge bases in companies and organizations, exact database lookups have become ubiquitous tools and used on a daily basis. Bioclipse Decision Support provides a framework for running exact match queries against a library of chemical structures, which was demonstrated for 3 open safety endpoints~\cite{Spjuth:2011qf}. An example query can be seen in Figure~\ref{fig:danth-ds}.
 
 
