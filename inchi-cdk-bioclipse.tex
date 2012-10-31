@@ -187,7 +187,7 @@
         % Do not use inserted blank lines (ie \\) until main body of text.
 
 \paragraph*{Background:}
-The InChI algorithms are written in C [CHECK! MAYBE C++?] and not available as Java library.
+The InChI algorithms are written in C++ and not available as Java library.
 Integration into software written in Java therefore requires a bridge between C and Java libraries,
 provided by the Java Native Interface (JNI) technology.
 
@@ -259,12 +259,34 @@ It is of great importance that chemical structures can be serialized in standard
 %%
 \section*{Results and Discussion}
 
-\subsection*{Packaging InChI in a Java library}
+\subsection*{Packaging InChI in Java Archives and Maven bundles}
 
 JNI-InChI is the packaging of the InChI libraries in portable Java libraries using the Java Native Interface~\cite{5Paper}.
-Available on Sourceforge under GNU Lesser General Public License (LGPL). The JNI-InChI library provides native binaries of the
-InChI library for 32- and 64-bit Windows, Linux and Solaris, 64-bit FreeBSD and 64-bit Intel-based Mac OS X, covering the most
-common platforms on which the CDK and Bioclipse are run.
+Available on Sourceforge under GNU Lesser General Public License (LGPL) [VERSION??]~\cite{JNIINCHIURL}.
+The JNI-InChI library provides native binaries of the InChI library for 32- and 64-bit Windows, Linux and Solaris,
+64-bit FreeBSD and 64-bit Intel-based Mac OS X, covering the most common platforms on which the CDK and Bioclipse are run.
+The library is available as a regular Jar Archive (.jar file), as Maven bundle from the JNI-InChI project website
+at \url{http://jni-inchi.sf.net/}.
+
+%OSGi bundles
+\subsection*{Provisioning of InChI as OSGi bundles}
+%The former uses the stock JAR archive provided by the JNI-InChI project, but those have been found insufficient for OSGi environments.
+
+While Maven makes library dependency management a lot easier, it is not the only platform to do so.
+OSGi~\cite{osgi} is another standard for dynamic module system in Java, allowing for easy provisioning and interoperability of modules, mainly containing compiled Java code but also associated data. The Bioclipse project has developed OSGi bundles for InChI by wrapping the JNI-InChI libraries, which required some modifications to e.g. class loaders. The OSGi bundles are available from a p2 repository for easy provisioning and integration. Having OSGi bundles with InChI enables easy access from all plugins supporting this module technology. Cheminformatics tools that makes use of the OSGi module system includes KNIME~\cite{Warr:2012kx}, Cytoscape (as of version 3)~\cite{Shannon:2003zr},
+PathVisio (as of version 3 [CHECK!!!])~\cite{}, Taverna~\cite{Oinn:2004ys,Truszkowski:2011vn}, and Bioclipse~\cite{Spjuth:2007ve}. 
+More information and the bundles itself can be found at \url{http://www.bioclipse.net/inchi-osgi}.
+
+\subsection*{The JNI-InChI API}
+
+The JNI-InChI library is written to directly make calls to the InChI library. That is, it will make library calls
+directly, rather than using a command line to access the library. To make this possible with JNI, it defines a
+JniInchiWrapper class which has a Java API of which some methods are written in Java, and some call native
+methods in the matching JniInchiWrapper.c class that directly calls the C++ InChI library.
+This wrapper allows the JNI-InChI user to set up a proper data model for the chemical structure for which the
+InChI should be calculated, and to set the generation options, allowing users to select, for example, which
+InChI layers should be generated or if just a standard InChI should be calculated. Table~\ref{tab:wrapper}
+shows several Java methods of the JniInChIWrapper class.
 
 \subsection*{Integration of InChI in CDK [EGON, SAM]}
 
@@ -294,11 +316,6 @@ The bridge allows InChI and InChIKeys to be generated using various options... /
 \end{center}
 \end{figure*}
 
-%OSGi bundles
-\subsection*{Provisioning of InChI as OSGi bundles}
-%The former uses the stock JAR archive provided by the JNI-InChI project, but those have been found insufficient for OSGi environments.
-
-OSGi~\cite{osgi} is a standard for dynamic module system in Java, allowing for easy provisioning and interoperability of modules, mainly containing compiled Java code but also associated data. The Bioclipse projects has developed OSGi bundles for InChI by wrapping the JNI-InChI libraries, which required some modifications to e.g. class loaders. The OSGi bundles are available from a p2 repository for easy provisioning and integration. Having OSGi bundles with InChI enables easy access from all plugins supporting this module technology. Cheminformatics tools that makes use of the OSGi module system includes Knime~\cite{Warr:2012kx}, Cytoscape~\cite{Shannon:2003zr}, Taverna~\cite{Oinn:2004ys,Truszkowski:2011vn}, and Bioclipse~\cite{Spjuth:2007ve}. See \url{http://www.bioclipse.net/inchi-osgi} for more information about InChI as OSGi bundles.
 
 %InChI in Bioclipse
 \subsection*{Integration of InChI in Bioclipse}
@@ -482,8 +499,14 @@ Talk about problems with InChI versions. We overcome some with prefs page allowi
 
 %% Use of \listoftables is discouraged.
 %%
-%\section*{Tables}
-%  \subsection*{Table 1 - Sample table title}
+\section*{Tables}
+  \subsection*{Table 1 - Various Java methods from the JniInChIWrapper class.}
+  \label{tab:wrapper}
+\begin{tabular}{ll}
+loadLibrary() & Loads the InChI library suitable for the platform. \\
+
+\end{tabular}
+
 %    Here is an example of a \emph{small} table in \LaTeX\ using  
 %    \verb|\tabular{...}|. This is where the description of the table 
 %    should go. \par \mbox{}
