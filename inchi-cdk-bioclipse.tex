@@ -318,9 +318,18 @@ System.out.println(
 );
 \end{verbatim}
 
-The full API is available as HTML JavaDoc at \url{}.
+The full API is available as HTML JavaDoc at \url{}. What does API does not do, is support input of chemical
+structures from chemical file formats, such as the MDL molfile format supported by the InChI library itself.
+Instead, JNI-InChI encourages cheminformatics libraries to use convertors that translate their internal
+data structure into the JNI-InChI data structure, using the methods of the JniInchiInput class.
+One library taking this approach is the CDK.
 
-\subsection*{Integration of InChI in CDK [EGON, SAM]}
+\subsection*{Integration of JNI-InChI into the CDK}
+
+The primary purpose of the integration of the JNI-InChI into the CDK is to allow the translation of the
+CDK data structure into that of JNI-InChI. Using this approach, we can convert the content of any chemical
+file format the CDK supports into InChIs, overcoming limitations of the InChI library in terms of supported
+file formats.
 
 While JNI-InChI supports the full range of functionality of the InChI C library, structure-to-InChI, InChI-to-structure,
 AuxInfo-to-structure, InChIKey generation, and InChI and InChIKey validation, not all of this functionality is available in the
