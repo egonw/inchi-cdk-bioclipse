@@ -285,8 +285,40 @@ JniInchiWrapper class which has a Java API of which some methods are written in 
 methods in the matching JniInchiWrapper.c class that directly calls the C++ InChI library.
 This wrapper allows the JNI-InChI user to set up a proper data model for the chemical structure for which the
 InChI should be calculated, and to set the generation options, allowing users to select, for example, which
-InChI layers should be generated or if just a standard InChI should be calculated. Table~\ref{tab:wrapper}
-shows several Java methods of the JniInChIWrapper class.
+InChI layers should be generated or if just a standard InChI should be calculated.
+
+The code subset of the API of the JniInchiWrapper and JniInchiStructure classes is given in Table 1. Using this
+API we can, for example, calculate the InChI string for ethane (without non-default options; in Java):
+
+\begin{verbatim}
+JniInchiInput input = new JniInchiInput("");
+JniInchiAtom a1 = input.addAtom(
+  new JniInchiAtom(
+    0.000, 0.000, 0.000, "C"
+  )
+);
+a1.setImplicitH(3);
+JniInchiAtom a2 = input.addAtom(
+  new JniInchiAtom(
+    0.000, 0.000, 0.000, "C"
+  )
+);
+a2.setImplicitH(3);
+input.addBond(
+  new JniInchiBond(
+    a1, a2, INCHI_BOND_TYPE.SINGLE
+  )
+);
+  
+JniInchiOutput output =
+  JniInchiWrapper.getInchi(input);
+System.out.println(
+  "The InChI for ethane is: " +
+  output.getInchi()
+);
+\end{verbatim}
+
+The full API is available as HTML JavaDoc at \url{}.
 
 \subsection*{Integration of InChI in CDK [EGON, SAM]}
 
@@ -503,8 +535,25 @@ Talk about problems with InChI versions. We overcome some with prefs page allowi
   \subsection*{Table 1 - Various Java methods from the JniInChIWrapper class.}
   \label{tab:wrapper}
 \begin{tabular}{ll}
+\textbf{JniInChIWrapper} & \\
+\hline
 loadLibrary() & Loads the InChI library suitable for the platform. \\
-
+getInchi(JniInchiInput) & Generates an InChI for the given input structure, with the \\
+                        & InChI options passed with the input. \\
+getStdInchi(JniInchiInput) & Generates a Standard InChI for the given input structure. \\
+getStructureFromInchi(JniInchiInputInchi) & Generates a structure from an InChI string (without coordinates). \\
+getInchiKey(String) & Converts an InChI into an InChIKey. \\
+checkInchi(String, boolean) & Check the validity of a (non-standard) InChI either loosely or strict. \\
+checkInchiKey(String, boolean) & Check the validity of a (non-standard) InChIKey either loosely or strict. \\
+\hline
+\textbf{JniInchiInput} & \\
+\hline
+JniInchiInput(List) & Constructor allowing you to set the InChI generation options \\
+                     & as a List of Strings. \\
+addAtom(JniInchiAtom) & Adds an atom to the input structure. \\
+addBond(JniInchiBond( & Adds a bond to the input structure. \\
+addStereo0D(JniInchiStereo0D) & Adds a tetrahedral, bond, or allene stereochemistry \\
+                              & element to the input structure. \\
 \end{tabular}
 
 %    Here is an example of a \emph{small} table in \LaTeX\ using  
