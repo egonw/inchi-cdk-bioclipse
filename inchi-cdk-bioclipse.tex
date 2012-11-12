@@ -333,20 +333,26 @@ file formats.
 
 While JNI-InChI supports the full range of functionality of the InChI C library, structure-to-InChI, InChI-to-structure,
 AuxInfo-to-structure, InChIKey generation, and InChI and InChIKey validation, not all of this functionality is available in the
-CDK library, in version 1.4.13. 
+CDK library, in version 1.4.13 and later.
 
-The CDK-to-JNI-InChI bridge supports the following layers:
-\begin{itemize}
-\item connectivity layer, /c
-\item tetrahedral stereochemistry layers, /t, /m, and /s
-\item double bond stereochemistry, /FOO (from 2D coordinates)
-\item isotope layer, /BAR
-\item ...
-\end{itemize}
+The CDK-to-JNI-InChI bridge supports the following layers: the connectivity layer, tetrahedral and double bond stereochemistry layers, the isotope layer, and the charge layer. Additonally, the CDK API for generating InChIs allows the
+use of various options, so that standard InChIs and non-standard InChIs can be generated. For example,
+an InChI with the fixed hydrogen layer can be calculated with the Java code:
 
-TBC
+\begin{verbatim}
+InChIGeneratorFactoryfactory =
+  InChIGeneratorFactory.getInstance();
+generator = factory.getInChIGenerator(
+  mierezuur, "FixedH"
+);
+System.out.println(
+  generator.getInchi()
+);
+\end{verbatim}
 
-The bridge allows InChI and InChIKeys to be generated using various options... /FixedH, etc, ...
+The CDK uses this functionality further for generate tautomers, as proposed by Thalheim et al.~\cite{Thalheim2010},
+and demonstrated later in this paper. Another feature is that the InChI library can be use to generate canonical
+atom numbers, which is done with the InChINumbersTools class.
 
 \begin{figure*}[!hb]
 \begin{center}
@@ -429,7 +435,7 @@ as a HTML page and opened in a browser window (not shown).
 
 \subsubsection*{c) CDK tautomer calculation in Bioclipse moltable [EGON]}
 
-The InChI library can also be used to generate tautomers\cite{FOO}. This method has been
+The InChI library can also be used to generate tautomers\cite{Thalheim2010}. This method has been
 implemented in the CDK by Rijnbeek~\cite{patchFOO}, and exposed in the Bioclipse Scripting Language:
 
 {\footnotesize 
