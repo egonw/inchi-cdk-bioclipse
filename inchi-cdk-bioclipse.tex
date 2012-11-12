@@ -401,26 +401,28 @@ Bioclipse is a workbench for the life sciences where cheminformatics is the most
 In chemical safety assessment, the first step when faced with a new chemical structure is to see weather it already has been synthesized, and if any in vitro assays or in vivo studies have been performed. Given the large size of knowledge bases in companies and organizations, exact database lookups have become ubiquitous tools and used on a daily basis. Bioclipse Decision Support provides a framework for running exact match queries against a library of chemical structures, which was demonstrated for 3 open safety endpoints~\cite{Spjuth:2011qf}. An example query can be seen in Figure~\ref{fig:danth-ds}.
 
 
-\subsubsection*{b) Linked data spidering in Bioclipse with Isbjørn [EGON]}
+\subsubsection*{b) Linked data spidering in Bioclipse with Isbjørn}
 
-Molecular structures on the internet can be searched using InChI and InChIKeys~\cite{PMRSomething} directly.
+Molecular structures on the internet can be searched using InChI and InChIKeys~\cite{Coles2005} directly.
 However, they can also be used as seed to spider (the process of following links on the world wide web)
 the Linked Data section of the World Wide Web~\cite{Samwald2011}. We developed a plugin to Bioclipse
 that searches the Internet for information about a molecule, initiated with the InChI and a web service
-we developed earlier, providing Universal Resource Identifiers for molecules~\cite{SomeRONPaper}. This
+we developed earlier, providing Universal Resource Identifiers for molecules, available
+at \url{http://rdf.openmolecules.net/}~\cite{Willighagen2011}. This
 service provides a number of initial links to other Linked Data resources, and links to other
 resources are followed using owl:sameAs and skos:exactMatch predicates.
 
 While spidering the web of molecular information, common ontologies are recognized and use to extract
 information about the compound. Recognized ontologies include general ontologies like
-Dublin Code, RDF Scheme, SKOS, and FOAF~\cite{FOAF}, as well as domain specific ontologies, like
-ChemAxiom~\cite{AdamsNP}, CHEMINF~\cite{Hastings2011}, and specific predicates
-used by specific databases, including Bio2RDF~\cite{Bio2RDF}, DBPedia~\cite{DBPedia},
-FreeBase~\cite{FreeBase} and ChemSpider~\cite{ChemSpider} (see Figure~\ref{fig:dbpedia} left).
+Dublin Core (\url{http://dublincore.org/}), RDF Schema~\cite{Guha:04:RVD}, SKOS~\cite{Bechhofer:09:SSK},
+and FOAF~\cite{Grav07}, as well as domain specific ontologies, like
+ChemAxiom~\cite{Adams2009}, CHEMINF~\cite{Hastings2011}, and specific predicates
+used by specific databases, including Bio2RDF~\cite{Belleau2008}, DBPedia~\cite{DBPEDIA},
+and ChemSpider~\cite{Pence2010} (see Figure~\ref{fig:isbjorn} left).
 
 But by educating Isbjørn about further ontologies we can even, for example, extract drug side effects
-from the SIDER database~\cite{SIDER}, as exposed by the Free University Berlin RDF services,
-as shown in Figure~\ref{fig:sider} right. The search results of Isbjørn are presented in Bioclipse
+from the SIDER database~\cite{Kuhn2010}, as exposed by the Free University Berlin RDF services,
+as shown in Figure~\ref{fig:isbjorn} right. The search results of Isbjørn are presented in Bioclipse
 as a HTML page and opened in a browser window (not shown).
 
 \begin{figure*}[!hb]
@@ -428,26 +430,28 @@ as a HTML page and opened in a browser window (not shown).
 	\includegraphics[width=7cm]{isbjorn6.png}
 	\includegraphics[width=7cm]{isbjorn8.png}
 \caption{Screenshot of Linked Data spidering results by Isbjørn presented as a HTML page.}
-\label{fig:danth-ds}
+\label{fig:isbjorn}
 \end{center}
 \end{figure*}
 
 
-\subsubsection*{c) CDK tautomer calculation in Bioclipse moltable [EGON]}
+\subsubsection*{c) CDK tautomer calculation in Bioclipse moltable}
 
 The InChI library can also be used to generate tautomers\cite{Thalheim2010}. This method has been
-implemented in the CDK by Rijnbeek~\cite{patchFOO}, and exposed in the Bioclipse Scripting Language:
+implemented in the CDK by Rijnbeek~\cite{Rijnbeek2011}, and exposed in the Bioclipse Scripting Language.
+Tautomers can be calculated for any molecule, for example, created from a SMILES string in this
+example for phenol:
 
-{\footnotesize 
 \begin{verbatim}
-
-// no aromatic rings that make it hard to see where the
-// double bonds are
+// no aromatic rings that make it hard to
+// see where the double bonds are
 jcpglobal.setShowAromaticity(false);
 
 inputSMILES = "c1ccccc1O";
 inputName = "phenol";
-inchi.generate(cdk.fromSMILES(inputSMILES))
+inchi.generate(
+  cdk.fromSMILES(inputSMILES)
+)
 tautomers = cdk.getTautomers(
   cdk.fromSMILES(inputSMILES)
 )
@@ -455,14 +459,12 @@ tautomers = cdk.getTautomers(
 file = "/Virtual/" + inputName + ".sdf";
 cdk.saveSDFile(file, tautomers);
 ui.open(file);
-
 \end{verbatim}
-}
 
 Using this approach we can generate tautomers for any molecules, though it is limited by
 the heuristic rules implemented by the InChI library. We typically only find a subset
 of tautomers, rather than a full set. For example, for warfarin it finds only six tautomers
-out of the 43 reported ones~\cite{FOO2}.
+out of the 40 reported ones~\cite{Porter2010}.
 
 %%%%%%%%%%%%%%%%%%%%%%
 \section*{Conclusions}
