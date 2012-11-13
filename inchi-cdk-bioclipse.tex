@@ -468,8 +468,15 @@ out of the 40 reported ones~\cite{Porter2010}.
 
 %%%%%%%%%%%%%%%%%%%%%%
 \section*{Conclusions}
-Summarize what we have done and the implications.\\
-Talk about problems with InChI versions. We overcome some with prefs page allowing users to select InChI version.
+InChI has chosen the path to rely on a single implementation for standardizing InChI calculations, and it is important that this code is readily available for all cheminformatics software development. We have described the packaging of InChI as a Java library using a JNI bridge (JNI-InChI) available as a Java Archive and Maven bundles, as well as the integration of this into the CDK library for cheminformatics. We have also shown how  the JNI-InChI into OSGi bundles renders InChI easily available for software using this dynamic module system, such as the Bioclipse workbench.
+
+%Problems with InChI versions
+A general problem with InChI is that there have been multiple versions available, and for end users of cheminformatics software it has not always been evident what version is available or has been used for calculating InChI in different databases. CDK supports both standard and non-standard InChIs, and in Bioclipse there is a preference page allowing the users to indicate the default InChI version of preference.
+
+%Implications
+InChI is of great utility for uniquely identifying molecular structures in a canonical format, and is hence well suited for exact matches in database queries which we here have exemplified in computational pharmacology. Another example of the benefits if having the InChI library as a Java library is that it enables CDK and Bioclipse to generate tautomers. But perhaps the greatest potential of InChI is for linking data, where it is possible to aggregate knowledge from disparate sources. Our example with Isbjørn in Bioclipse shows the potential for the common task to collect as much information as possible about a novel chemical structure. 
+
+What could be improved... [TBC]
 
 
   
