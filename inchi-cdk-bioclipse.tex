@@ -468,18 +468,41 @@ out of the 40 reported ones~\cite{Porter2010}.
 
 %%%%%%%%%%%%%%%%%%%%%%
 \section*{Conclusions}
-InChI has chosen the path to rely on a single implementation for standardizing InChI calculations, and it is important that this code is readily available for all cheminformatics software development. We have described the packaging of InChI as a Java library using a JNI bridge (JNI-InChI) available as a Java Archive and Maven bundles, as well as the integration of this into the CDK library for cheminformatics. We have also shown how  the JNI-InChI into OSGi bundles renders InChI easily available for software using this dynamic module system, such as the Bioclipse workbench.
+The InChI project has chosen the path to rely on a single implementation for standardizing InChI calculations,
+and it is important that this code is readily available for all cheminformatics software development. This paper
+describes the packaging of InChI as a Java library using a JNI bridge (JNI-InChI), which is available as a Java
+Archive (jar file), and as Maven bundles. It further shows the integration into the CDK library and
+how the JNI-InChI as OSGi bundles renders InChI easily available for software using this dynamic module system,
+such as the Bioclipse workbench. The various binary packages make the InChI library easily useable in
+a variety of Java environments.
 
 %Problems with InChI versions
-A general problem with InChI is that there have been multiple versions available, and for end users of cheminformatics software it has not always been evident what version is available or has been used for calculating InChI in different databases. CDK supports both standard and non-standard InChIs, and in Bioclipse there is a preference page allowing the users to indicate the default InChI version of preference.
+A feature of the InChI is that it supports various layers of detail in describing the chemical structure,
+which has confused end users of cheminformatics software. This resulted in a set of chosen layers, resulting
+in the standard InChI. The CDK supports generation and processing of both the standard and non-standard InChIs.
+Bioclipse provides a preference page where users can indicate which InChI they like to be calculated by
+default.
 
 %Implications
-InChI is of great utility for uniquely identifying molecular structures in a canonical format, and is hence well suited for exact matches in database queries which we here have exemplified in computational pharmacology. Another example of the benefits if having the InChI library as a Java library is that it enables CDK and Bioclipse to generate tautomers. But perhaps the greatest potential of InChI is for linking data, where it is possible to aggregate knowledge from disparate sources. Our example with Isbjørn in Bioclipse shows the potential for the common task to collect as much information as possible about a novel chemical structure. 
+The uses in the CDK and Bioclipse have shown that the InChI is of great utility for uniquely identifying
+molecular structures in a canonical form, and is therefore well suited for exact matches in database searches.
+as exemplified in computational pharmacology example. This makes it also highly suitable for mining the
+internet and the Linked Data network. We demonstrate this with our Isbjørn plugin for Bioclipse, which
+aggregates knowledge about chemical compounds from an increasing list of disparate sources. The use of the
+InChI here, shows the potential for the common task to collect as much information as possible about a
+novel chemical structure, uniquely identified by the InChI. But the use of the InChI algorithms is not limited to
+that purpose, and has further benefits. We demonstrate this with the exposure in the CDK and Bioclipse to
+generate tautomers. 
 
-What could be improved... [TBC]
+% Limitations
+Our results show that it is possible to overcome the problem that the InChI algorithm is not implemented
+in Java, but it comes at a price. Using non-Java code in a Java environment requires a bridge, for which
+we used JNI, but crossing this bridge is computationally expensive. Furthermore, the integration into the
+CDK requires bridging two data models: one for the CDK and one for the InChI library. A suite of unit
+tests is in place to validate that information is correctly translated from the CDK data model into
+calculted InChIs. However, a full validation using the InChI project test suite has not been completed
+yet.
 
-
-  
 %%%%%%%%%%%%%%%%%%
 %\section*{Methods}
 %  \subsection*{Methods sub-heading for this section}
