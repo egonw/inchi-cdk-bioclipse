@@ -318,9 +318,9 @@ System.out.println(
 );
 \end{verbatim}
 
-The full API is available as HTML JavaDoc at \url{}. What does API does not do, is support input of chemical
+The full API is available as HTML JavaDoc at \url{http://jni-inchi.sourceforge.net/apidocs/}. What does API does not do, is support input of chemical
 structures from chemical file formats, such as the MDL molfile format supported by the InChI library itself.
-Instead, JNI-InChI encourages cheminformatics libraries to use convertors that translate their internal
+Instead, JNI-InChI encourages cheminformatics libraries to use converters that translate their internal
 data structure into the JNI-InChI data structure, using the methods of the JniInchiInput class.
 One library taking this approach is the CDK.
 
@@ -335,7 +335,7 @@ While JNI-InChI supports the full range of functionality of the InChI C library,
 AuxInfo-to-structure, InChIKey generation, and InChI and InChIKey validation, not all of this functionality is available in the
 CDK library, in version 1.4.13 and later.
 
-The CDK-to-JNI-InChI bridge supports the following layers: the connectivity layer, tetrahedral and double bond stereochemistry layers, the isotope layer, and the charge layer. Additonally, the CDK API for generating InChIs allows the
+The CDK-to-JNI-InChI bridge supports the following layers: the connectivity layer, tetrahedral and double bond stereochemistry layers, the isotope layer, and the charge layer. Additionally, the CDK API for generating InChIs allows the
 use of various options, so that standard InChIs and non-standard InChIs can be generated. For example,
 an InChI with the fixed hydrogen layer can be calculated with the Java code:
 
@@ -381,7 +381,7 @@ Bioclipse is a workbench for the life sciences where cheminformatics is the most
 \begin{center}
 	\includegraphics[width=9cm]{danthron-ds.png}
 
-\caption{Part of the Bioclipse workbench showing the Decision Support feature with three exact matches enabled (right canvas) and the chemical structure of the withdrawn drug Danthron. We see that the data sets for CPDB~\cite{Fitzpatrick:2008dp} and Ames Mutagenicity~\cite{Kazius:2005pv} both gives an exact match, and that this compound has previously been shown to be positive (mutagen) in an Ames Mutagenicity test as well as positive for an in vivo carcinogenicity test included in the Carcinogenicity Potency Database.}
+\caption{Part of the Bioclipse workbench showing the Decision Support feature with three exact matches enabled (right canvas) and the chemical structure of the withdrawn drug danthron. We see that the data sets for CPDB~\cite{Fitzpatrick:2008dp} and Ames Mutagenicity~\cite{Kazius:2005pv} both gives an exact match, and that this compound has previously been shown to be positive (mutagen) in an Ames Mutagenicity test as well as positive for an in vivo carcinogenicity test included in the Carcinogenicity Potency Database.}
 \label{fig:danth-ds}
 \end{center}
 \end{figure*}
@@ -473,7 +473,7 @@ and it is important that this code is readily available for all cheminformatics 
 describes the packaging of InChI as a Java library using a JNI bridge (JNI-InChI), which is available as a Java
 Archive (jar file), and as Maven bundles. It further shows the integration into the CDK library and
 how the JNI-InChI as OSGi bundles renders InChI easily available for software using this dynamic module system,
-such as the Bioclipse workbench. The various binary packages make the InChI library easily useable in
+such as the Bioclipse workbench. The various binary packages make the InChI library easily usable in
 a variety of Java environments.
 
 %Problems with InChI versions
@@ -500,7 +500,7 @@ in Java, but this however comes at a price. Using non-Java code in a Java enviro
 we used JNI, but crossing this bridge is computationally expensive. Furthermore, the integration into the
 CDK requires bridging two data models: one for the CDK and one for the InChI library. A suite of unit
 tests is in place to validate that information is correctly translated from the CDK data model into
-calculted InChIs. However, a full validation using the InChI project test suite has not been completed
+calculated InChIs. However, a full validation using the InChI project test suite has not been completed
 yet.
 
 %%%%%%%%%%%%%%%%%%
