@@ -354,40 +354,16 @@ The CDK uses this functionality further for generate tautomers, as proposed by T
 and demonstrated later in this paper. Another feature is that the InChI library can be use to generate canonical
 atom numbers, which is done with the InChINumbersTools class.
 
-\begin{figure*}[!hb]
-\begin{center}
-	\includegraphics[width=9cm]{carbamazepine-props.png}
-
-\caption{Part of the Bioclipse workbench showing the chemical structure for the drug carbamazepine, with the InChI and InChIKey displayed as properties in the bottom canvas. Editing the chemical structure instantly triggers a recalculation of these properties.}
-\label{fig:carba-prop}
-\end{center}
-\end{figure*}
-
 
 %InChI in Bioclipse
 \subsection*{Integration of InChI in Bioclipse}
 Bioclipse is a workbench for the life sciences where cheminformatics is the most developed functionality. Key features of Bioclipse includes import, export and editing of chemical structures in various file formats, as well as visualizations and various property calculations - all features available from both a graphical workbench as well as a built-in scripting language (Bioclipse Scripting Language, or BSL)~\cite{Spjuth:2009ly}. As a Rich Client built on the Eclipse Rich Client Platform (RCP), Bioclipse inherits an extensible architecture implementing the OSGi standard. By adding the previously described InChI OSGi bundles to Bioclipse, Bioclipse exposes InChI calculation as a key feature in the workbench, and InChI is calculated on all structure modifications and visualized as a general property in the workbench window (see Figure~\ref{fig:carba-prop}). Bioclipse supports both the generation of standard and non-standard InChIs, and a preference allows for selecting between the different versions.
-
-
 
 \begin{verbatim}
   mol=cdk.fromSMILES("OC=O")
   sinchi = inchi.generate(mol);
   inchi = inchi.generate(mol), "FixedH");
 \end{verbatim}
-
-
-\begin{figure*}[!hb]
-\begin{center}
-	\includegraphics[width=9cm]{danthron-ds.png}
-
-\caption{Part of the Bioclipse workbench showing the Decision Support feature with three exact matches enabled (right canvas) and the chemical structure of the withdrawn drug danthron. We see that the data sets for CPDB~\cite{Fitzpatrick:2008dp} and Ames Mutagenicity~\cite{Kazius:2005pv} both gives an exact match, and that this compound has previously been shown to be positive (mutagen) in an Ames Mutagenicity test as well as positive for an in vivo carcinogenicity test included in the Carcinogenicity Potency Database.}
-\label{fig:danth-ds}
-\end{center}
-\end{figure*}
-
-	
-
 
 
 %%%%%%%%%%
@@ -426,16 +402,6 @@ But by educating Isbjørn about further ontologies we can even, for example, ext
 from the SIDER database~\cite{Kuhn2010}, as exposed by the Free University Berlin RDF services,
 as shown in Figure~\ref{fig:isbjorn} right. The search results of Isbjørn are presented in Bioclipse
 as a HTML page and opened in a browser window (not shown).
-
-\begin{figure*}[!hb]
-\begin{center}
-	\includegraphics[width=7cm]{isbjorn6.png}
-	\includegraphics[width=7cm]{isbjorn8.png}
-\caption{Screenshot of Linked Data spidering results by Isbjørn presented as a HTML page.}
-\label{fig:isbjorn}
-\end{center}
-\end{figure*}
-
 
 \subsubsection*{c) CDK tautomer calculation in Bioclipse moltable}
 
@@ -563,14 +529,38 @@ generation in the CDK.
 %%
 %% Do not use \listoffigures as most will included as separate files
 
-%\section*{Figures}
-%  \subsection*{Figure 1 - Sample figure title}
-%      A short description of the figure content
-%      should go here.
-%
-%  \subsection*{Figure 2 - Sample figure title}
-%      Figure legend text.
+\section*{Figures}
+  \subsection*{Figure~\ref{fig:carba-prop} - Part of the Bioclipse workbench showing the chemical structure for the drug carbamazepine.}
+      The InChI and InChIKey displayed as properties in the bottom canvas. Editing the chemical structure instantly triggers a recalculation of these properties.
 
+\begin{figure*}[!hb]
+\begin{center}
+	\includegraphics[width=9cm]{carbamazepine-props.png}
+\caption{}\label{fig:carba-prop}
+\end{center}
+\end{figure*}
+
+\subsection*{Figure~\ref{fig:danth-ds} - Part of the Bioclipse workbench showing the Decision Support feature.}
+It shows three exact matches enabled (right canvas) and the chemical structure of the withdrawn drug danthron. We see that the data sets for CPDB~\cite{Fitzpatrick:2008dp} and Ames Mutagenicity~\cite{Kazius:2005pv} both gives an exact match, and that this compound has previously been shown to be positive (mutagen) in an Ames Mutagenicity test as well as positive for an in vivo carcinogenicity test included in the Carcinogenicity Potency Database.
+
+\begin{figure*}[!hb]
+\begin{center}
+	\includegraphics[width=9cm]{danthron-ds.png}
+\caption{}
+\label{fig:danth-ds}
+\end{center}
+\end{figure*}
+
+\subsection*{Figure~\ref{fig:isbjorn} - Screenshot of Linked Data spidering results by Isbjørn presented as a HTML page.}
+
+\begin{figure*}[!hb]
+\begin{center}
+	\includegraphics[width=7cm]{isbjorn6.png}
+	\includegraphics[width=7cm]{isbjorn8.png}
+\caption{}
+\label{fig:isbjorn}
+\end{center}
+\end{figure*}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
