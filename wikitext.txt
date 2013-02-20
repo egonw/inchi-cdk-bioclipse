@@ -1,0 +1,44 @@
+== a) Decision support in computational pharmacology ==
+Bioclipse Decision Support provides a framework for running exact match queries against a library of chemical structures, which was demonstrated for 3 open safety endpoints in the Bioclipse Decision Support paper.
+
+=== Running Bioclipse Decision Support ===
+Download the latest Bioclipse from Sourceforge.
+Go to menu Install > DS Models and choose e.g. Ames Mutagenicity, AhR, or Carcinogenicity.
+Open your query molecule in Bioclipse (e.g. start from SMILES or import a mol/cml/sdf file).
+Switch to the Decision Support perspective (menu: Window > Open Perspective > Others...).
+In the rightmost Decision Support view, press the Run button.
+
+<Image of exact match>
+
+
+== b) Linked data spidering in Bioclipse with Isbjørn ==
+Isbjørn is a plugin to Bioclipse that searches the Internet
+for information about a molecule, initiated with the InChI and a web service we developed earlier, providing Universal Resource Identifiers for molecules, available at http://rdf.openmolecules.net/. This service provides a number of initial links to other Linked Data resources, and links to other resources are followed using owl:sameAs and skos:exactMatch predicates. The search results of Isbjørn are presented in Bioclipse as a HTML page and opened in a browser window.
+
+=== Starting Isbjørn in Bioclipse ===
+1.
+2.
+
+<Image of Isbjørn in action>
+
+
+== c) CDK tautomer calculation in Bioclipse moltable ==
+The InChI library can be used to generate tautomers, a feature which is exposed in the Bioclipse Scripting Language (BSL). Below is an example script for calculating tautomers for phenol.
+
+// no aromatic rings that make it hard to
+// see where the double bonds are
+jcpglobal.setShowAromaticity(false);
+inputSMILES = "c1ccccc1O";
+inputName = "phenol";
+inchi.generate(
+  cdk.fromSMILES(inputSMILES)
+)
+tautomers = cdk.getTautomers(
+  cdk.fromSMILES(inputSMILES)
+)
+file = "/Virtual/" + inputName + ".sdf";
+cdk.saveSDFile(file, tautomers);
+ui.open(file);
+
+
+
